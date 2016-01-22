@@ -68,12 +68,14 @@ public class WizardActivity extends AppCompatActivity {
                 .add(R.id.container, WizardFragment.newInstance(colorCodes[count]), ""+count)
                 .addToBackStack(null)
                 .commit();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.menu = menu;
+        checkIfLast();
         return true;
     }
 
@@ -98,9 +100,10 @@ public class WizardActivity extends AppCompatActivity {
                                 .commit();
                     }
 
-                    if (count == numberOfScreens - 1) {
-                        item.setTitle(DONE);
-                    }
+                    checkIfLast();
+//                    if (count == numberOfScreens - 1) {
+//                        item.setTitle(DONE);
+//                    }
 
                     getSupportActionBar().setTitle("Screen " + (count + 1) + "/" + colors.length);
                 }
@@ -108,6 +111,13 @@ public class WizardActivity extends AppCompatActivity {
             }
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void checkIfLast(){
+        MenuItem item = menu.findItem(R.id.menu1);
+        if (count == numberOfScreens - 1) {
+            item.setTitle(DONE);
         }
     }
 

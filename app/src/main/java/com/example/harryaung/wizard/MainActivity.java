@@ -3,6 +3,7 @@ package com.example.harryaung.wizard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startWizard(){
-        if (compare()){
+        colors = color_sequence.getText().toString().split(",");
+        Log.d("WizardActivity", "colorLength:" + colors.length);
+
+        int numberScreen = Integer.parseInt(number_of_screens.getText().toString());
+        if (numberScreen > 5 || numberScreen < 1 || colors.length > 5 || colors[0].equals(""))
+            Toast.makeText(this, "Number of screens or sequence must be between 1 and 5", Toast.LENGTH_LONG).show();
+
+        else if (compare()){
             Bundle bundle = new Bundle();
             bundle.putInt(NUMBER_OF_SCREENS,Integer.parseInt(number_of_screens.getText().toString()));
             bundle.putString(COLOR_SEQUENCE,color_sequence.getText().toString().trim().toLowerCase());
@@ -47,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean compare(){
-        colors = color_sequence.getText().toString().split(",");
         if (colors.length == Integer.parseInt(number_of_screens.getText().toString()))
             return true;
+
 
         return false;
     }
