@@ -23,7 +23,8 @@ public class WizardActivity extends AppCompatActivity {
     private int count=0;
     private Menu menu;
     private int[] colorCodes;
-    private final String DONE = "Done";
+    private final String DONE = "DONE";
+    private final String NEXT = "NEXT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +134,9 @@ public class WizardActivity extends AppCompatActivity {
         Log.d("WizardActivity", "changeTitle");
         count--;
         getSupportActionBar().setTitle("Screen " + (count + 1) + "/" + colors.length);
+        MenuItem item = menu.findItem(R.id.menu1);
+        if (item.getTitle().equals(DONE))
+            item.setTitle(NEXT);
     }
 
 }
